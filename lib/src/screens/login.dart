@@ -3,11 +3,22 @@ import '../blocs/login_bloc.dart';
 
 class Login extends StatelessWidget {
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('Login')
+      ),
+      body: buildLogin(),
+    );
+  }
+  Widget buildLogin() {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           emailField(),
           passwordField(),
+          Container(margin: EdgeInsets.only(top: 15.0),),
           submitButton(),
         ],
       ),

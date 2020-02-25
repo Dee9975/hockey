@@ -15,24 +15,14 @@ class App extends StatelessWidget {
       case '/': {
         return MaterialPageRoute(
           builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text('Login')
-              ),
-              body: Login(),
-            );
+            return Login();
           }
         );
       }
       case '/team': {
         return MaterialPageRoute(
           builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text('Team'),
-              ),
-              body: Team(),
-            );
+            return Team();
           }
         );
       }
