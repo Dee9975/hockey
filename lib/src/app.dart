@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hockey_app/src/screens/news_detail.dart';
 import 'screens/login.dart';
 import 'screens/team.dart';
+import 'screens/news_detail.dart';
 
 class App extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -23,6 +25,13 @@ class App extends StatelessWidget {
         return MaterialPageRoute(
           builder: (context) {
             return Team();
+          }
+        );
+      }
+      case '/news/detail': {
+        return MaterialPageRoute(
+          builder: (context) {
+            return NewsDetail();
           }
         );
       }
