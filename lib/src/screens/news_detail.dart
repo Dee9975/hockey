@@ -5,27 +5,7 @@ class NewsDetail extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-         SliverAppBar(
-            pinned: true,
-            expandedHeight: 250.0,
-            flexibleSpace: FlexibleSpaceBar(
-              stretchModes: <StretchMode>[
-                StretchMode.zoomBackground,
-                StretchMode.blurBackground,
-              ],
-              centerTitle: true,
-              background: Stack(
-
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    'https://scontent.frix3-1.fna.fbcdn.net/v/t1.0-9/51709400_2422406507783381_6796528992775045120_o.jpg?_nc_cat=101&_nc_sid=a61e81&_nc_ohc=1UjaiumfGzgAX-Wbwr-&_nc_ht=scontent.frix3-1.fna&oh=c07a841971140922c691f3fc2d8c960c&oe=5EBA2E2A',
-                    fit: BoxFit.cover,
-                  ),
-                ],
-              ),
-            ),
-          ),
+         buildAppBar('https://scontent.frix3-1.fna.fbcdn.net/v/t1.0-9/51709400_2422406507783381_6796528992775045120_o.jpg?_nc_cat=101&_nc_sid=a61e81&_nc_ohc=1UjaiumfGzgAX-Wbwr-&_nc_ht=scontent.frix3-1.fna&oh=c07a841971140922c691f3fc2d8c960c&oe=5EBA2E2A'),
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -53,6 +33,7 @@ Ac tincidunt vitae semper quis lectus. Sed risus pretium quam vulputate dignissi
       ),
     );
   }
+
   Widget buildTitle(String title) {
     return Container(
       margin: EdgeInsets.only(top: 20.0, bottom: 15.0),
@@ -86,6 +67,30 @@ Ac tincidunt vitae semper quis lectus. Sed risus pretium quam vulputate dignissi
         Text(authorName, style: TextStyle(fontWeight: FontWeight.bold)),
         Container(margin: EdgeInsets.only(bottom: 20.0),),
       ],
+    );
+  }
+
+  Widget buildAppBar(String imageLink) {
+    return SliverAppBar(
+      pinned: true,
+      expandedHeight: 250.0,
+      flexibleSpace: FlexibleSpaceBar(
+        stretchModes: <StretchMode>[
+          StretchMode.zoomBackground,
+          StretchMode.blurBackground,
+        ],
+        centerTitle: true,
+        background: Stack(
+
+          fit: StackFit.expand,
+          children: [
+            Image.network(
+              imageLink,
+              fit: BoxFit.cover,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

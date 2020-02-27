@@ -4,71 +4,117 @@ import '../blocs/login_bloc.dart';
 class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text('Login')
-      ),
       body: buildLogin(),
     );
   }
   Widget buildLogin() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          emailField(),
-          passwordField(),
-          Container(margin: EdgeInsets.only(top: 15.0),),
-          submitButton(),
-        ],
-      ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            loginHeader(),
+            loginFields()
+          ],
+        ),
     );
   }
 
-  Widget emailField() {
-    return StreamBuilder(
-      stream: bloc.email,
-      builder: (context, snapshot) {
-        return TextField(
+  Widget loginHeader() => Column(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: <Widget>[
+      FlutterLogo(
+        colors: Colors.green,
+        size: 80,
+      ),
+      SizedBox(
+        height: 30.0,
+      ),
+      Text(
+        "Welcome to ice manager!",
+        style: TextStyle(fontWeight: FontWeight.w700, color: Colors.green),
+      ),
+      SizedBox(
+        height: 5.0,
+      ),
+      Text(
+        "Sign in to continue",
+        style: TextStyle(color: Colors.grey),
+      ),
+    ],
+  );
+
+  Widget loginFields() => Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        emailField(),
+        passwordField(),
+        SizedBox(height: 30.0,),
+        submit(),
+        SizedBox(height: 5.0,),
+        Text(
+          'SIGN UP FOR AN ACCOUNT',
+          style: TextStyle(
+            color: Colors.grey
+          ),
+        )
+      ],
+    ),
+  );
+
+  Widget emailField() => StreamBuilder(
+    stream: bloc.email,
+    builder: (context,snapshot) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+        child: TextField(
           onChanged: bloc.changeEmail,
           keyboardType: TextInputType.emailAddress,
+          maxLines: 1,
           decoration: InputDecoration(
-            hintText: 'example@example.com',
-            labelText: 'Email',
+            hintText: "Enter your email",
+            labelText: "Email",
             errorText: snapshot.error,
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
 
-  Widget passwordField() {
-    return StreamBuilder(
-      stream: bloc.password,
-      builder: (context, snapshot) {
-        return TextField(
+  Widget passwordField() => StreamBuilder(
+    stream: bloc.password,
+    builder: (context,snapshot) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
+        child: TextField(
           onChanged: bloc.changePassword,
           obscureText: true,
+          maxLines: 1,
           decoration: InputDecoration(
-            hintText: 'Password',
-            labelText: 'Password',
+            hintText: "Enter your password",
+            labelText: "Password",
             errorText: snapshot.error,
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
 
-  Widget submitButton() {
-    return StreamBuilder(
-      stream: bloc.submitValid,
-      builder: (context, snapshot) {
-        return RaisedButton(
+  Widget submit() => StreamBuilder(
+    stream: bloc.submitValid,
+    builder: (context, snapshot) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 30.0),
+        width: double.infinity,
+        child: RaisedButton(
+          padding: EdgeInsets.all(12.0),
+          shape: StadiumBorder(),
           child: Text(
-            'Login',
-            style: TextStyle(color: Colors.white,)
+            'SIGN IN',
+            style: TextStyle(color: Colors.white),
           ),
-          color: Colors.blueAccent,
+          color: Colors.green,
           onPressed: () {
             if(!snapshot.hasData) {
               return null;
@@ -76,8 +122,8 @@ class Login extends StatelessWidget {
             bloc.submit();
             Navigator.pushNamed(context, '/team');
           },
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
 }
